@@ -1,0 +1,70 @@
+# Adopt version 2 syntax:
+#   https://docs.docker.com/compose/compose-file/#/versioning
+version: '2'
+
+services:
+###########################
+# Setup the PHP container
+###########################
+    phpsymfony:
+        container_name: ${NAME_PHP_CONTAINER}
+        restart: always
+        build: ./.docker/phpSymfony/
+        volumes:
+            - ./project/:/home/project
+            - ./projecttmp/log/php:/usr/local/projecttmp/log/php:rw
+            - ./projecttmp/log/xdebug:/usr/local/projecttmp/log/xdebug:rw
+            - ./projecttmp/tmp/php:/usr/local/projecttmp/tmp/php:rw
+            - ./.docker/php/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
+            - ./.docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
+            - ./.docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+        ports:
+            - ${VALUE_PHPSYMPONY_PORT}:8000
+            
+
+###########################
+# Setup the Database (MariaDB) container
+###########################
+    mariadb:
+        container_name: ${NAME_MARIABD_CONTAINER}
+        restart: always
+        image: mariadb:${VALUE_MARIABD_VERSION}
+        volumes:
+            - ./projecttmp/log/sgbd:/var/log/mysql:rw
+            - ./projecttmp/tmp/sgbd:/var/tmp/mysql:rw
+            - ./projecttmp/sgbd_data:/var/lib/mysql
+            - ./.docker/mariadb/mariadb.cnf:/etc/mysql/conf.d/mariadb.cnf:ro
+            # start sql
+            - ./.docker/sgbd_data/0000_phpmyadmin.sql:/docker-entrypoint-initdb.d/0000_phpmyadmin.sql
+            # stop sql
+        environment:
+            - MYSQL_ROOT_PASSWORD=secret
+        entrypoint:
+            sh -c "/usr/local/bin/docker-entrypoint.sh --character-set-server=latin1 --collation-server=latin1_swedish_ci"
+            
+###########################
+# Setup the PhpMyAdmin container
+###########################
+    myadmin:
+        container_name: ${NAME_PHPMYADMIN_CONTAINER}
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        environment:
+            - PMA_PORT=3306
+            - PMA_HOST=${NAME_MARIABD_CONTAINER}
+            - PMA_USER=root
+            - PMA_PASSWORD=secret
+        ports:
+            - ${VALUE_PHPMYADMIN_PORT}:80
+        depends_on: 
+            - mariadb
+            
+###########################
+# Setup the mailhog container
+###########################
+    mailhog:
+        container_name: ${NAME_MAILHOG_CONTAINER}
+        image: mailhog/mailhog:${VALUE_MAILHOG_VERSION}
+        ports:
+            - ${VALUE_MAILHOG_DISPLAY_PORT}:8025
+            
