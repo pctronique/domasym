@@ -32,6 +32,6 @@ fi
 docker-compose up -d
 
 ./updateEnv.sh
-#./createProject.sh
-./updateProject.sh
+./createProject.sh
+#./updateProject.sh
 ./start.sh
