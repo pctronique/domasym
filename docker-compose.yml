@@ -13,14 +13,14 @@ services:
         volumes:
             - ./project/:/home/project
             - ./projecttmp/log/php:/usr/local/projecttmp/log/php:rw
+            - ./projecttmp/logs/symfony:/home/projecttmp/logs/symfony:rw
             - ./projecttmp/log/xdebug:/usr/local/projecttmp/log/xdebug:rw
             - ./projecttmp/tmp/php:/usr/local/projecttmp/tmp/php:rw
-            - ./.docker/php/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
-            - ./.docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
-            - ./.docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+            - ./.docker/phpSymfony/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
+            - ./.docker/phpSymfony/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
+            - ./.docker/phpSymfony/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
         ports:
             - ${VALUE_PHPSYMPONY_PORT}:8000
-            
 
 ###########################
 # Setup the Database (MariaDB) container
@@ -45,9 +45,9 @@ services:
 ###########################
 # Setup the PhpMyAdmin container
 ###########################
-    myadmin:
+    phpmyadmin:
         container_name: ${NAME_PHPMYADMIN_CONTAINER}
-        image: phpmyadmin/phpmyadmin
+        image: phpmyadmin:${VALUE_PHPMYADMIN_VERSION}
         restart: always
         environment:
             - PMA_PORT=3306
@@ -64,7 +64,7 @@ services:
 ###########################
     mailhog:
         container_name: ${NAME_MAILHOG_CONTAINER}
-        image: mailhog/mailhog:${VALUE_MAILHOG_VERSION}
+        image: mailhog/mailhog
         ports:
             - ${VALUE_MAILHOG_DISPLAY_PORT}:8025
             

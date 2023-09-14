@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:fpm
 
 VOLUME "/home/project"
 WORKDIR "/home/project"
@@ -58,8 +58,6 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 WORKDIR "/home/project"
 
 # Install symfony  
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 

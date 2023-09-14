@@ -4,9 +4,13 @@ mkdir -p projecttmp/tmp
 mkdir -p projecttmp/tmp/php
 mkdir -p projecttmp/tmp/sgbd
 mkdir -p projecttmp/log
+mkdir -p projecttmp/logs/symfony
 mkdir -p projecttmp/log/php
 mkdir -p projecttmp/log/xdebug
 mkdir -p projecttmp/log/sgbd
+
+touch projecttmp/logs/symfony/symfony_out.log
+touch projecttmp/logs/symfony/symfony_error.log
 
 # copier les configurations et fichiers
 cp -R config/data/ project/www/
@@ -27,4 +31,7 @@ fi
 # creation du docker du projet
 docker-compose up -d
 
-#symfony new projectSymphony --webapp --no-git 
+./updateEnv.sh
+#./createProject.sh
+./updateProject.sh
+./start.sh
