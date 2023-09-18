@@ -37,26 +37,27 @@ services:
             - ./projecttmp/tmp/sgbd:/var/tmp/mysql:rw
             - ./projecttmp/sgbd_data:/var/lib/mysql
             - ./.docker/mariadb/mariadb.cnf:/etc/mysql/conf.d/mariadb.cnf:ro
-            # start sql
             - ./.docker/sgbd_data/0000_phpmyadmin.sql:/docker-entrypoint-initdb.d/0000_phpmyadmin.sql
+            # start sql
+            - ./.docker/sgbd_data/0001_domasym.sql:/docker-entrypoint-initdb.d/0001_domasym.sql
             # stop sql
         environment:
-            - MYSQL_ROOT_PASSWORD=secret
+            - MYSQL_ROOT_PASSWORD=${SGBD_ROOT_PASSWORD}
         entrypoint:
             sh -c "/usr/local/bin/docker-entrypoint.sh --character-set-server=latin1 --collation-server=latin1_swedish_ci"
             
 ###########################
 # Setup the PhpMyAdmin container
 ###########################
-    myadmin:
+    phpmyadmin:
         container_name: ${NAME_PHPMYADMIN_CONTAINER}
         image: phpmyadmin/phpmyadmin
         restart: always
         environment:
             - PMA_PORT=3306
             - PMA_HOST=mariadb
-            - PMA_USER=${VALUE_PHPMYADMIN_PORT}
-            - PMA_PASSWORD=${VALUE_PHPMYADMIN_PORT}
+            - PMA_USER=${SGBD_ROOT_USERNAME}
+            - PMA_PASSWORD=${SGBD_ROOT_PASSWORD}
         ports:
             - ${VALUE_PHPMYADMIN_PORT}:80
         depends_on: 

@@ -1,4 +1,4 @@
-# dmasy (Docker ANGUlar)
+# domasym (DOcker MAriadb SYMfony)
 
 La base docker pour un projet en nodejs. Contient une base d'un serveur nodejs.
 
@@ -53,7 +53,7 @@ La base docker pour un projet angular. Ceci est une base, vous pouvez le modifie
 > Vous devez installer docker pour pouvoir l'utiliser.
 
 ### L'avantage d'utiliser docker
-Lorsque vos faites un projet avec docker vous devez transmettre la totalité du projet, les fichiers de création des conteneurs et le code. Pour ce projet, vous devez transmettre le contenu en totalité du dossier "**dangu**" (**que vous pouvez et surtout devez le renommer au nom de votre projet**) dans un git.<br />
+Lorsque vos faites un projet avec docker vous devez transmettre la totalité du projet, les fichiers de création des conteneurs et le code. Pour ce projet, vous devez transmettre le contenu en totalité du dossier "**domasym**" (**que vous pouvez et surtout devez le renommer au nom de votre projet**) dans un git.<br />
 Les avantages :<br />
 * Pas de programme à installer sur votre pc (à part docker et un éditeur ou IDE)
 * Travailler à plusieurs avec les mêmes conteneurs à l'identique
@@ -115,11 +115,11 @@ Pour la création du conteneur docker pour le projet.
 ### Le fichier .env
 Modifier le contenu du fichier "**.env.example**" :
 ```
-NAME_PROJECT=dangu
-NAME_ANGULAR_CONTAINER=dangu_angular
-NAME_SGBD_CONTAINER=dangu_mongo
-NAME_MOEXPRESS_CONTAINER=dangu_moexpress
-NAME_MAILHOG_CONTAINER=dangu_mailhog
+NAME_PROJECT=domasym
+NAME_ANGULAR_CONTAINER=domasym_angular
+NAME_SGBD_CONTAINER=domasym_mongo
+NAME_MOEXPRESS_CONTAINER=domasym_moexpress
+NAME_MAILHOG_CONTAINER=domasym_mailhog
 ```
 Par le nom de votre projet, par exemple 'nameProject' :
 ```
@@ -179,10 +179,12 @@ Sur le projet actuel, on utilise les nouvelles versions ce qui peut poser des pr
 <br /><img src="./images/Screenshot_20230914_092538.png" alt="exemple angular server" width="300" height="175"><br />
 ```
 $ ./bin/terminal.sh
-# nodejs -v
-v20.6.1
-# ng version
-Angular CLI: 16.2.2
+# php -v
+PHP 8.2.10 (cli) (built: Sep  7 2023 06:04:45) (NTS)
+# symfony version
+Symfony CLI version 5.5.8 (c) 2021-2023 Fabien Potencier
+# composer -V
+Composer version 2.6.3 2023-09-15 09:38:21
 ```
 Dand le fichier "**.docker/angular/Dockerfile**", remplacé '**latest**' par la bonne version disponible pour docker :
 ```
@@ -295,4 +297,8 @@ $ ./bin/terminal_mariadb.sh
 mariadb  Ver 15.1 Distrib 10.7.3-MariaDB, for debian-linux-gnu (x86_64) using readline 5.2
 ```
 
-composer require symfony/maker-bundle --dev
+______composer require symfony/maker-bundle --dev
+composer require symfony/mailer
+composer require symfony/mailer
+symfony console make:controller BrandNewController
+composer require symfony/sendgrid-mailer
