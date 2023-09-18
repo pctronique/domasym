@@ -19,19 +19,27 @@ cp -R config/data/ project/www/
 chmod 777 -R project
 chmod 777 -R projecttmp
 
-# creation du fichier .env
-if [ -e .env ]
+ # creation du fichier .gitignore
+if [ ! -e project/.gitignore ]
 then
-    echo ""
-else
-    echo ""
+    cp .docker/config/gitignore_symphony project/.gitignore
+fi
+
+ # creation du fichier env.local.example
+if [ ! -e project/.env.local.example ]
+then
+    cp .docker/config/env.local.example project/.env.local.example
+fi
+
+# creation du fichier .env
+if [ ! -e .env ]
+then
     cp .env.example .env
 fi
 
 # creation du docker du projet
 docker-compose up -d
 
-./updateEnv.sh
-./createProject.sh
-#./updateProject.sh
+./bin/createProject.sh
+#./bin/updateProject.sh
 ./start.sh

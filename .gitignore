@@ -1,5 +1,5 @@
+/nbproject/private/
 /projecttmp/
-/.env
 /project/projectSymphony/node_modules/
 /project/projectSymphony/npm-debug.log
 /project/projectSymphony/yarn-error.log
@@ -11,3 +11,5 @@
 /project/projectSymphony/public/bundles/
 /project/projectSymphony/var/
 /project/projectSymphony/vendor/
+/project/projectSymphony/
+/.env
