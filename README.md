@@ -295,3 +295,4 @@ $ ./bin/terminal_mariadb.sh
 mariadb  Ver 15.1 Distrib 10.7.3-MariaDB, for debian-linux-gnu (x86_64) using readline 5.2
 ```
 
+composer require symfony/maker-bundle --dev
