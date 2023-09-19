@@ -23,9 +23,8 @@ d_restart () {
     d_start
 }
  
-d_list () {
-    /home/updateProject.sh
-}
+#d_list () {
+#}
  
 case "$1" in
     start|stop|list)

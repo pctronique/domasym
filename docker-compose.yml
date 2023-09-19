@@ -1,6 +1,6 @@
 # Adopt version 2 syntax:
 #   https://docs.docker.com/compose/compose-file/#/versioning
-version: '2'
+version: '3.27'
 
 services:
 ###########################
@@ -33,14 +33,14 @@ services:
         restart: always
         image: mariadb:${VALUE_MARIABD_VERSION}
         volumes:
-            - ./projecttmp/log/sgbd:/var/log/mysql:rw
+            - ./projecttmp/logs/sgbd:/var/log/mysql:rw
             - ./projecttmp/tmp/sgbd:/var/tmp/mysql:rw
             - ./projecttmp/sgbd_data:/var/lib/mysql
             - ./.docker/mariadb/mariadb.cnf:/etc/mysql/conf.d/mariadb.cnf:ro
             - ./.docker/sgbd_data/0000_phpmyadmin.sql:/docker-entrypoint-initdb.d/0000_phpmyadmin.sql
-            # start sql
+            # start data
             - ./.docker/sgbd_data/0001_domasym.sql:/docker-entrypoint-initdb.d/0001_domasym.sql
-            # stop sql
+            # stop data
         environment:
             - MYSQL_ROOT_PASSWORD=${SGBD_ROOT_PASSWORD}
         entrypoint:
@@ -51,7 +51,7 @@ services:
 ###########################
     phpmyadmin:
         container_name: ${NAME_PHPMYADMIN_CONTAINER}
-        image: phpmyadmin/phpmyadmin
+        image: phpmyadmin/phpmyadmin::${VALUE_PHPMYADMIN_VERSION}
         restart: always
         environment:
             - PMA_PORT=3306

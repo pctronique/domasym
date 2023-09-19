@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : mariadb:3306
--- Généré le : mar. 13 avr. 2021 à 12:19
--- Version du serveur :  10.2.25-MariaDB-1:10.2.25+maria~bionic-log
--- Version de PHP : 7.4.16
+-- Généré le : mar. 19 sep. 2023 à 13:58
+-- Version du serveur : 10.7.3-MariaDB-1:10.7.3+maria~focal
+-- Version de PHP : 8.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,48 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `domasym`
 --
-CREATE DATABASE IF NOT EXISTS `domasym` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `domasym` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
 USE `domasym`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `people`
+--
+
+CREATE TABLE `people` (
+  `id` int(10) NOT NULL,
+  `firstname` varchar(100) NOT NULL DEFAULT '',
+  `lastname` varchar(100) NOT NULL DEFAULT '',
+  `views` int(10) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `people`
+--
+
+INSERT INTO `people` (`id`, `firstname`, `lastname`, `views`) VALUES
+(1, 'Alan', 'Turing', 1250000);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `people`
+--
+ALTER TABLE `people`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `people`
+--
+ALTER TABLE `people`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

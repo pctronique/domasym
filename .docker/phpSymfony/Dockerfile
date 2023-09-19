@@ -32,18 +32,18 @@ RUN apt install -y unzip
 RUN apt install -y libyaml-dev
 RUN apt install -y libc-client-dev
 RUN apt install -y libkrb5-dev
+#RUN docker-php-ext-install json
 
-RUN docker-php-ext-configure gd --with-jpeg
-RUN docker-php-ext-configure intl
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
-RUN docker-php-ext-install gd
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zip
+RUN docker-php-ext-configure gd --with-jpeg
+RUN docker-php-ext-install gd
+RUN docker-php-ext-configure intl
 RUN docker-php-ext-install intl
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 RUN docker-php-ext-install imap
-#RUN docker-php-ext-install json
     
 # Goto temporary directory.
 WORKDIR /tmp
@@ -54,10 +54,12 @@ RUN mkdir /var/composer
 ENV COMPOSER_HOME /var/composer  
 ENV COMPOSER_ALLOW_SUPERUSER 1 
 
-WORKDIR "/home/project"
+WORKDIR "/tmp"
 
 # Install symfony  
 RUN curl -sS https://get.symfony.com/cli/installer | bash
-RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
+RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony 
+
+WORKDIR "/home/project"
 
 CMD ["php-fpm"]

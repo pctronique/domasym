@@ -3,17 +3,13 @@ mkdir -p projecttmp/sgbd_data
 mkdir -p projecttmp/tmp
 mkdir -p projecttmp/tmp/php
 mkdir -p projecttmp/tmp/sgbd
-mkdir -p projecttmp/log
+mkdir -p projecttmp/logs
 mkdir -p projecttmp/logs/symfony
-mkdir -p projecttmp/log/php
-mkdir -p projecttmp/log/xdebug
-mkdir -p projecttmp/log/sgbd
+mkdir -p projecttmp/logs/php
+mkdir -p projecttmp/logs/sgbd
 
 touch projecttmp/logs/symfony/symfony_out.log
 touch projecttmp/logs/symfony/symfony_error.log
-
-# copier les configurations et fichiers
-cp -R config/data/ project/www/
 
 # modifier les droits sur les dossiers
 chmod 777 -R project

@@ -1,1 +1,1 @@
-./bin/server.sh start &
+./bin/server.sh restart
