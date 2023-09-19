@@ -49,7 +49,7 @@ Version 1.0.0
 </details>
 
 ## Présentation
-La base docker pour un projet en nodejs. Ceci est une base, vous pouvez le modifier selon vos besoins.<br />
+La base docker pour un projet en symfony. Ceci est une base, vous pouvez le modifier selon vos besoins.<br />
 > [!WARNING]
 > Vous devez installer docker pour pouvoir l'utiliser.
 
