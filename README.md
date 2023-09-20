@@ -293,7 +293,7 @@ Lors de l'installation, il démarre le serveur symphony du mini-projet sur '**lo
 <br /><img src="./images/screen70.jpg" alt="exemple angular server" width="300" height="175"><br />
 Vous pouvez modifier le démarrage de votre projet dans le fichier "**.env.example**" et aussi dans le fichier "**.env**" :
 ```
-FOLDER_PROJECT_SYMFONY=projectSymfony
+FOLDER_PROJECT_SYMFONY=www
 ```
 Quand vous allez redémarrer le pc, il faudra relancer le serveur Nodejs avec la commande :
 ```
@@ -315,7 +315,7 @@ docker exec $NAME_SYMFONY_CONTAINER bash -c "cd $FOLDER_PROJECT_SYMFONY/ && comp
 Vous allez avoir besoin de faire des commandes symfony sur votre code, pour ce faire :
 ```
 $ ./bin/terminal.sh
-# cd projectSymfony/
+# cd www/
 # symfony console make:controller BrandNewController
 ```
 

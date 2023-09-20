@@ -3,6 +3,11 @@ FROM php:fpm
 VOLUME "/home/project"
 WORKDIR "/home/project"
 
+COPY startserver /etc/init.d/
+
+RUN chmod +x /etc/init.d/startserver
+RUN update-rc.d startserver defaults
+
 RUN set -ex
 RUN apt update
 RUN apt upgrade -y  
@@ -46,7 +51,7 @@ RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 RUN docker-php-ext-install imap
     
 # Goto temporary directory.
-WORKDIR /tmp
+WORKDIR "/tmp"
 
 # Install composer  
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer  
@@ -54,12 +59,10 @@ RUN mkdir /var/composer
 ENV COMPOSER_HOME /var/composer  
 ENV COMPOSER_ALLOW_SUPERUSER 1 
 
-WORKDIR "/tmp"
-
 # Install symfony  
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony 
 
 WORKDIR "/home/project"
 
-CMD ["php-fpm"]
+CMD service startserver start && tail -F /var/log/symfony/error.log && php-fpm
