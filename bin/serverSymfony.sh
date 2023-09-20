@@ -33,7 +33,7 @@ then
     echo "   stop"
     echo "   restart"
     echo "   reload"
-    echo "   force-reload"
+    echo "   log"
     echo "   --helps"
 else
    case "$1" in
@@ -49,8 +49,8 @@ else
          d_log
          ;;
 
-      helps)
-         echo "Usage: ./bin/server.sh {start|stop|log|restart|reload|force-reload|helps}"
+      *)
+         echo "Usage: ./bin/server.sh {start|stop|restart|reload|log|helps}"
          exit 1
          ;;
 
