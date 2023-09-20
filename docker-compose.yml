@@ -6,23 +6,22 @@ services:
 ###########################
 # Setup the PHP container
 ###########################
-    phpsymfony:
+    symfony:
         container_name: ${NAME_SYMFONY_CONTAINER}
         restart: always
-        build: ./.docker/phpSymfony/
+        build: ./.docker/symfony/
         volumes:
             - ./project/:/home/project
-            - ./.docker/phpSymfony/startserver:/etc/init.d/startserver:rw
-            - ./.docker/phpSymfony/updateProject.sh:/home/updateProject.sh:rw
+            - ./projecttmp/logs/php:/var/log/php:rw
+            - ./projecttmp/tmp/php:/var/tmp/php:rw
+            - ./projecttmp/logs/symfony:/var/log/symfony:rw
+            - ./.docker/symfony/startserver:/etc/init.d/startserver:rw
+            - ./.docker/symfony/updateProject.sh:/home/updateProject.sh:rw
+            - ./.docker/symfony/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
+            - ./.docker/symfony/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
             - ./.env:/home/.env:rw
-            - ./projecttmp/logs/php:/usr/local/projecttmp/log/php:rw
-            - ./projecttmp/logs/xdebug:/usr/local/projecttmp/log/xdebug:rw
-            - ./projecttmp/tmp/php:/usr/local/projecttmp/tmp/php:rw
-            - ./.docker/phpSymfony/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
-            - ./.docker/phpSymfony/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
-            - ./projecttmp/logs/symfony:/home/projecttmp/logs/symfony:rw
         ports:
-            - ${VALUE_PHPSYMPONY_PORT}:8000
+            - ${VALUE_SYMFONY_PORT}:8000
             
 
 ###########################
@@ -51,7 +50,7 @@ services:
 ###########################
     phpmyadmin:
         container_name: ${NAME_PHPMYADMIN_CONTAINER}
-        image: phpmyadmin/phpmyadmin::${VALUE_PHPMYADMIN_VERSION}
+        image: phpmyadmin/phpmyadmin:${VALUE_PHPMYADMIN_VERSION}
         restart: always
         environment:
             - PMA_PORT=3306

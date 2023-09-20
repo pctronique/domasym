@@ -5,7 +5,6 @@ done < ${0%/*}/../.env
 
 d_start () {
    docker container start $NAME_SYMFONY_CONTAINER
-   docker exec $NAME_SYMFONY_CONTAINER /etc/init.d/startserver start
 }
 
 d_stop () {
@@ -15,6 +14,11 @@ d_stop () {
 d_restart () {
    d_stop
    d_start
+}
+ 
+d_force () {
+   d_restart
+   docker exec $NAME_SYMFONY_CONTAINER bash -c "service startserver start && tail -F /var/log/symfony/error.log" &
 }
 
 option=$1
@@ -30,6 +34,7 @@ then
     echo "   stop"
     echo "   restart"
     echo "   reload"
+    echo "   force-reload"
     echo "   --helps"
 else
    case "$1" in
@@ -41,8 +46,12 @@ else
          d_restart
          ;;
 
+      force-reload)
+         d_force
+         ;;
+
       helps)
-         echo "Usage: ./bin/server.sh {start|stop|restart|reload|helps}"
+         echo "Usage: ./bin/server.sh {start|stop|restart|reload|force-reload|helps}"
          exit 1
          ;;
 

@@ -10,6 +10,7 @@ mkdir -p projecttmp/logs/sgbd
 
 touch projecttmp/logs/symfony/symfony_out.log
 touch projecttmp/logs/symfony/symfony_error.log
+touch projecttmp/logs/symfony/error.log
 
 # modifier les droits sur les dossiers
 chmod 777 -R project
