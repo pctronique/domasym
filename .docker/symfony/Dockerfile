@@ -61,10 +61,9 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # Install symfony  
 RUN curl -sS https://get.symfony.com/cli/installer | bash
-RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony 
 
-#COPY folder_symfony.sh /tmp  
-#RUN /tmp/folder_symfony.sh  
+COPY folder_symfony.sh /tmp  
+RUN /tmp/folder_symfony.sh  
 
 WORKDIR "/home/project"
 

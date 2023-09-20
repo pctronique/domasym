@@ -5,6 +5,7 @@ mkdir -p projecttmp/tmp/php
 mkdir -p projecttmp/tmp/sgbd
 mkdir -p projecttmp/logs
 mkdir -p projecttmp/logs/symfony
+mkdir -p projecttmp/logs/symfonyd
 mkdir -p projecttmp/logs/php
 mkdir -p projecttmp/logs/sgbd
 
