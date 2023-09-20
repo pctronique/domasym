@@ -29,17 +29,15 @@ Version 1.0.0
     <li>
         <a href="#install-un-package-docker">Install un package (Docker)</a>
         <ul>
-            <li><a href="#le-fichier-env">Le fichier .env</a></li>
             <li><a href="#dans-dockerfile">Dans Dockerfile</a></li>
         </ul>
     </li>
     <li><a href="#logs-et-info-conteneur-docker">Logs et info conteneur (Docker)</a></li>
     <li><a href="#le-dossier-du-projet">Le dossier du projet</a></li>
     <li>
-        <a href="#mini-projet-nodejs">Mini projet angular</a>
+        <a href="#mini-projet">Mini projet</a>
         <ul>
-            <li><a href="##packages-installés-dans-le-mini-projet">Packages installés dans le mini-projet</a></li>
-            <li><a href="#options-pour-la-création-du-projet-angular">Options pour la création du projet angular</a></li>
+            <li><a href="#packages-installés-dans-le-mini-projet">Packages installés dans le mini-projet</a></li>
         </ul>
     </li>
     <li><a href="#les-commandes-angular-dans-le-mini-projet">Les commandes angular dans le mini-projet</a></li>
@@ -53,8 +51,11 @@ La base docker pour un projet en symfony. Ceci est une base, vous pouvez le modi
 > [!WARNING]
 > Vous devez installer docker pour pouvoir l'utiliser.
 
+<br />
+Vous devez placer votre code dans le dossier "**project/www/**".
+
 ### L'avantage d'utiliser docker
-Lorsque vous faites un projet avec docker vous devez transmettre la totalité du projet, les fichiers de création des conteneurs et le code. Pour ce projet, vous devez transmettre le contenu en totalité du dossier "**domasym**" (**que vous pouvez et surtout devez le renommer au nom de votre projet**) dans un git.<br />
+Lorsque vous faites un projet avec docker vous devez transmettre la totalité du projet, les fichiers de création des conteneurs et le code. Pour ce projet, vous devez transmettre le contenu en totalité du dossier "**domasym**" (**que vous pouvez et surtout, devez le renommer au nom de votre projet**) dans un git.<br />
 Les avantages :<br />
 * Pas de programme à installer sur votre pc (à part docker et un éditeur ou IDE)
 * Travailler à plusieurs avec les mêmes conteneurs à l'identique
@@ -73,7 +74,7 @@ Il installe aussi dans le conteneur :<br />
 Il y a plusieurs packages installés, vous pouvez les retrouver dans le fichier "**.docker/phpSymfony/Dockerfile**".
 
 <br /> 
-C'est dans ce conteneur que vous allez placer vos codes angular, dans le dossier "**project**" (qui est lié au conteneur).
+C'est dans ce conteneur que vous allez placer vos codes angular, dans le dossier "**project/www/**" (qui est lié au conteneur).
 <br /><img src="./images/screen70.jpg" alt="exemple nodejs server" width="300" height="175"><br />
 
 ### Conteneur mailhog
@@ -142,12 +143,16 @@ Si vous avez besoin de modifier le port, merci de le faire dans le fichier "**.e
 > [!WARNING]
 > Ne surtout pas le faire dans le fichier "**.env.example**".
 
+<br />
+* .env.example : configuration pour tout le monde qui travaille sur le projet
+* .env : configuration pour votre pc
+
 <br />Un port de votre pc peut être utilisé par un autre projet, il faudra donc modifier celui-ci. Ce qui est vrai sur un pc, ne le sera pas sur les autres, donc on ne modifit pas les valeurs dans le fichier "**.env.example**".<br />
 Il est préférable d'incrémenter à l'identique les ports du projet.<br />
-Je dois incrémenter de 9 un des ports, je le fais aussi pour les autres. Ceci évite de se perdre dans les ports disponibles.<br />
+Si je dois incrémenter de 9 un des ports, je le fais aussi pour les autres. Ceci évite de se perdre dans les ports disponibles.<br />
 Exemple :<br />
 ```
-VALUE_PHPSYMPONY_PORT=8009
+VALUE_SYMFONY_PORT=8009
 VALUE_PHPMYADMIN_PORT=8089
 VALUE_MAILHOG_DISPLAY_PORT=8029
 ```
@@ -212,18 +217,13 @@ COPY --from=composer:2.6.3 /usr/bin/composer /usr/bin/composer
 
 <br />
 
-Pour connaître la version pour mariadb :
+Pour modifier la version des autres conteneurs, c'est dans le fichier "**docker-compose.yml**" :
 ```
-$ ./bin/terminal_mariadb.sh 
-# mariadb --version
-mariadb  Ver 15.1 Distrib 10.7.3-MariaDB
-```
-Remplacer la version dans le fichier "**.env.example**" :
-```
-VALUE_MARIABD_VERSION=15.1-focal
+VALUE_MARIABD_VERSION=focal
 VALUE_PHPMYADMIN_VERSION=latest
 VALUE_MAILHOG_VERSION=latest
 ```
+Pour "**focal**", il faudra le remplacer par "**version-focal**".
 
 ## Rechercher un package (Docker)
 Si vous avez besoin d'un package pour votre projet dans le conteneur. Vous pouvez rechercher les packages disponibles pour le conteneur.
@@ -237,6 +237,12 @@ Si vous avez besoin d'installer un package dans votre conteneur.
 ```
 $ ./bin/terminal.sh
 # apt install name_package
+```
+
+### Dans Dockerfile
+Quand vous installez un package, vous devez aussi le rajouter dans le fichier "**.docker/linux_agcc/Dockerfile**", pour le conserver. Au niveau des "**apt install**".
+```
+RUN apt install name_package
 ```
 
 ## Logs et info conteneur (Docker)
@@ -273,17 +279,11 @@ Pour mettre les informations dans un fichier json :
 $ ./bin/container_info.sh --mailhog >> mailhog_info.json
 ```
 
-### Dans Dockerfile
-Quand vous installez un package, vous devez aussi le rajouter dans le fichier "**.docker/linux_agcc/Dockerfile**", pour le conserver. Au niveau des "**apt install**".
-```
-RUN apt install name_package
-```
-
 ## Le dossier du projet
-Votre code devra être placé dans le dossier "**project**".
+Votre code devra être placé dans le dossier "**project/www**".
 
-## Mini-projet symphony
-Il y a un mini-projet symphony pour vous montrer un exemple, mais vous pouvez le retirer en vidant le dossier "**project**".<br />
+## Mini-projet
+Il y a un mini-projet symphony pour vous montrer un exemple, mais vous pouvez le retirer en suppriment le dossier "**project/www**".<br />
 > [!WARNING]
 > Ne surtout pas supprimer le fichier "**.gitignore**" du dossier "**project**".<br />
 > Ne surtout pas supprimer le fichier "**.env.local.example**" du dossier "**project**".
@@ -291,14 +291,14 @@ Il y a un mini-projet symphony pour vous montrer un exemple, mais vous pouvez le
 
 Lors de l'installation, il démarre le serveur symphony du mini-projet sur '**localhost:8000**' si vous n'avez pas modifié le port (sinon il faut modifier le numéro de port du lien) :
 <br /><img src="./images/screen70.jpg" alt="exemple angular server" width="300" height="175"><br />
-Vous pouvez modifier le démarrage de votre projet dans le fichier "**.env.example**" et aussi dans le fichier "**.env**" :
+Vous pouvez modifier le nom du dossier du projet dans le fichier "**.env.example**" et aussi dans le fichier "**.env**" :
 ```
 FOLDER_PROJECT_SYMFONY=www
 ```
-Quand vous allez redémarrer le pc, il faudra relancer le serveur Nodejs avec la commande :
-```
-$ ./start.sh
-```
+> [!NOTE]
+> Il est préférable de conserver ce nom.
+
+<br />
 
 ### Packages installés dans le mini-projet
 Lors de la création du projet, il y a l'installation de package que vous pouvez retrouver dans le fichier "**./bin/createProject.sh**"
@@ -333,6 +333,7 @@ Options:
    stop
    restart
    reload
+   log
    --helps
 $ ./bin/server.sh start
 $ ./bin/server.sh stop

@@ -20,13 +20,13 @@ d_stop () {
     /home/updateProjectStart.sh stop
 }
  
-d_log () {
-    /home/updateProjectStart.sh log
-}
- 
 d_restart () {
     d_stop
     d_start
+}
+ 
+d_log () {
+    /home/updateProjectStart.sh log
 }
  
 case "$1" in
@@ -43,7 +43,7 @@ case "$1" in
         ;;
 
     *)
-        echo "Usage: /etc/init.d/$daemon_NAME {start|stop|log|restart|reload}"
+        echo "Usage: /etc/init.d/$daemon_NAME {start|stop|restart|reloadlog|}"
         exit 1
         ;;
 esac
