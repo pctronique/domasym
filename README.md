@@ -21,9 +21,9 @@ Version 1.0.0
         <a href="#création-du-conteneur-docker">Création du conteneur (Docker)</a>
         <ul>
             <li><a href="#le-fichier-env">Le fichier .env</a></li>
+            <li><a href="#les-ports-utilisés-par-docker">Les ports utilisés par docker</a></li>
             <li><a href="#modifier-l-adresse-de-port">Modifier l'adresse de port</a></li>
             <li><a href="#installer-le-conteneur">Installer le conteneur</a></li>
-            <li><a href="#modifier-le-fichier-d-intallation">Modifier le fichier d'intallation</a></li>
             <li><a href="#modifier-les-versions">Modifier les versions</a></li>
         </ul>
     </li>
@@ -39,12 +39,14 @@ Version 1.0.0
     <li>
         <a href="#mini-projet">Mini projet</a>
         <ul>
+            <li><a href="#les-fichiers-de-configurations-du-projet">Les fichiers de configurations du projet</a></li>
             <li><a href="#packages-installés-dans-le-mini-projet">Packages installés dans le mini-projet</a></li>
         </ul>
     </li>
     <li><a href="#les-commandes-angular-dans-le-mini-projet">Les commandes angular dans le mini-projet</a></li>
     <li><a href="#visualiser-les-messages-de-la-console-ou-les-logs">Visualiser les messages de la console ou les logs</a></li>
     <li><a href="#server-start-stop-restart">Server start|stop|restart</a></li>
+    <li><a href="#en-cas-de-problème-lors-d-installation">En cas de problème lors d'installation</a></li>
   </ol>
 </details>
 
@@ -65,9 +67,8 @@ Les avantages :<br />
 * Pas de programme à installer sur votre pc (à part docker et un éditeur ou IDE)
 * Travailler à plusieurs avec les mêmes conteneurs à l'identique
 * Prêt à travailler directement sur le code après la création des conteneurs
-* Avoir une base prés remplie lors de la création des conteneurs.<sup>(1)</sup>
+* Avoir une base prés remplie lors de la création des conteneurs.<sup>(1) [Conteneur mariadb](#conteneur-mariadb)</sup>
 <br /> Après installation des conteneurs, on peut directement continuer le code.
-<sup>(1) [Conteneur mariadb](#conteneur-mariadb)</sup>
 
 ### Conteneur symfony
 Il est conçu à partir de l'image du [docker php](https://hub.docker.com/_/php).<br />
@@ -121,33 +122,53 @@ Ceci est une petite partie des [SGBD](https://fr.wikipedia.org/wiki/Syst%C3%A8me
 
 ### Les fichiers de configurations
 Vous pouvez configurer votre serveur ou le php :
-* php.ini : dans le dossier ".docker/php/"
+* php.ini : dans le dossier ".docker/symfony/"
+
 > [!WARNING]
 > Si vous modifiez les configurations, il faudra redémarrer le conteneur : " [Server start|stop|restart](#server-start-stop-restart) ". 
 
+
 ## Création du conteneur (Docker)
 Vous devez avoir installé Docker. 
-Pour la création du conteneur docker pour le projet.
+Pour la création du conteneur docker du projet.
+
 ### Le fichier .env
-Modifier le contenu du fichier "**.env.example**" :
+Pour concevoir le projet avec le nom de "**nameProject**" :
 ```
-NAME_PROJECT=domasym
-NAME_SYMFONY_CONTAINER=domasym_symfony
-NAME_MARIABD_CONTAINER=domasym_mariadb
-NAME_PHPMYADMIN_CONTAINER=domasym_phpmyadmin
-NAME_MAILHOG_CONTAINER=domasym_mailhog
+$ ./bin/name.sh --name=nameProject
 ```
-Par le nom de votre projet, par exemple 'nameProject' :
+Ceci va créer le fichier "**.env**" avec le nom du projet pour les conteneurs.
+
+### Les ports utilisés par docker
+Vous pouvez visualiser les ports utilisés par docker avec la commande :
 ```
-NAME_PROJECT=nameProject
-NAME_SYMFONY_CONTAINER=nameProject_symfony
-NAME_MARIABD_CONTAINER=nameProject_mariadb
-NAME_PHPMYADMIN_CONTAINER=nameProject_phpmyadmin
-NAME_MAILHOG_CONTAINER=nameProject_mailhog
+$ docker container ls
+CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS                                                 NAMES
+a0669f134d4e   mongo-express:latest     "tini -- /docker-ent…"   6 seconds ago   Up 3 seconds   0.0.0.0:8080->8081/tcp, :::8080->8081/tcp             donomo_moexpress
+f2097a7768ce   donomo_nodjs             "docker-entrypoint.s…"   6 seconds ago   Up 5 seconds   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp             donomo_nodejs
+0889ec760f46   mongo:latest             "docker-entrypoint.s…"   6 seconds ago   Up 6 seconds   0.0.0.0:27020->27017/tcp, :::27020->27017/tcp         donomo_mongo
+e23b99a411c2   mailhog/mailhog:latest   "MailHog"                6 seconds ago   Up 6 seconds   1025/tcp, 0.0.0.0:8020->8025/tcp, :::8020->8025/tcp   donomo_mailhog
 ```
-Créé un fichier "**.env**" à partir du fichier "**.env.example**" (copier/coller). <br />
+Ici, je ne pourrais pas utiliser les ports :::8080, :::3000, :::27020 et :::8020, je devrais utiliser d'autre port. Si mon projet utilise un de ces ports, je devrais incrémenter les ports du projet de mon projet de 1 par exemple, pour 8081, 3001, 27021 et 8021 (si j'ai besoin de ces ports).
+
+<br />
+
 > [!WARNING]
-> Attention de conserver le fichier "**.env.example**".
+> C'est les ports utilisés par docker sur votre pc, mais ceci ne dis pas si d'autre port son utilisé par votre système.
+
+<br />
+
+Pour visualiser les ports utilisés sur **Linux** :
+```
+$ ss -natu | grep 0.0.0.0
+udp   UNCONN 0      0                                      0.0.0.0:5353                      0.0.0.0:*           
+udp   UNCONN 0      0                                      0.0.0.0:34968                     0.0.0.0:*            
+tcp   LISTEN 0      4096                                   0.0.0.0:27020                     0.0.0.0:*           
+tcp   LISTEN 0      4096                                   0.0.0.0:8080                      0.0.0.0:*          
+tcp   LISTEN 0      4096                                   0.0.0.0:8020                      0.0.0.0:*          
+tcp   LISTEN 0      4096                                   0.0.0.0:3000                      0.0.0.0:* 
+```
+Je ne pourrais pas utiliser les ports : 5353, 34968, 27020, 8080, 8020, 3000.
 
 ### Modifier l'adresse de port
 Si vous avez besoin de modifier le port, merci de le faire dans le fichier "**.env**".<br />
@@ -155,12 +176,12 @@ Si vous avez besoin de modifier le port, merci de le faire dans le fichier "**.e
 > Ne surtout pas le faire dans le fichier "**.env.example**".
 
 <br />
-* .env.example : configuration pour tout le monde qui travaille sur le projet
+* .env.example : configuration pour tout le monde qui travaille sur le projet <br /> 
 * .env : configuration pour votre pc
 
 <br />Un port de votre pc peut être utilisé par un autre projet, il faudra donc modifier celui-ci. Ce qui est vrai sur un pc, ne le sera pas sur les autres, donc on ne modifit pas les valeurs dans le fichier "**.env.example**".<br />
 Il est préférable d'incrémenter à l'identique les ports du projet.<br />
-Si je dois incrémenter de 9 un des ports, je le fais aussi pour les autres dans le fichier "**.env**". Ceci évite de se perdre dans les ports disponibles.<br />
+Si je dois incrémenter de 9 un des ports (je conserve la valeur d'incrémentation la plus haute), je le fais aussi pour les autres dans le fichier "**.env**". Ceci évite de se perdre dans les ports disponibles.<br />
 Exemple :<br />
 ```
 VALUE_SYMFONY_PORT=8009
@@ -173,21 +194,6 @@ Vous pouvez créer votre conteneur.
 ```
 $ ./install.sh
 ```
-
-### Modifier le fichier d'intallation
-Après l'installation, il faudra modifier le contenu du fichier "**install.sh**" :
-```
-./bin/createProject.sh
-#./bin/updateProject.sh
-./bin/start.sh
-```
-Par :
-```
-#./bin/createProject.sh
-./bin/updateProject.sh
-./bin/start.sh
-```
-Si ce n'est pas déjà fait.
 
 ### Modifier les versions
 > [!WARNING]
@@ -206,7 +212,7 @@ Symfony CLI version 5.5.8 (c) 2021-2023 Fabien Potencier
 # composer -V
 Composer version 2.6.3 2023-09-15 09:38:21
 ```
-Dand le fichier "**.docker/angular/Dockerfile**", remplacé :
+Dand le fichier "**.docker/symfony/Dockerfile**", remplacé :
 ```
 FROM php:fpm
 ```
@@ -228,7 +234,7 @@ COPY --from=composer:2.6.3 /usr/bin/composer /usr/bin/composer
 
 <br />
 
-Pour modifier la version des autres conteneurs, c'est dans le fichier "**docker-compose.yml**" :
+Pour modifier la version des autres conteneurs, c'est dans le fichier "**.env.example**" :
 ```
 VALUE_MARIABD_VERSION=focal
 VALUE_PHPMYADMIN_VERSION=latest
@@ -297,10 +303,6 @@ Votre code devra être placé dans le dossier "**project/www**".
 
 ## Mini-projet
 Il y a un mini-projet symphony pour vous montrer un exemple, mais vous pouvez le retirer en suppriment le dossier "**project/www**".<br />
-> [!WARNING]
-> Ne surtout pas supprimer le fichier "**.gitignore**" du dossier "**project**".<br />
-> Ne surtout pas supprimer le fichier "**.env.local.example**" du dossier "**project**".
-<br />
 
 Lors de l'installation, il démarre le serveur symphony du mini-projet sur '**localhost:8000**' si vous n'avez pas modifié le port (sinon il faut modifier le numéro de port du lien) :
 <br /><img src="./images/screen70.jpg" alt="exemple angular server" width="300" height="175"><br />
@@ -310,6 +312,15 @@ FOLDER_PROJECT_SYMFONY=www
 ```
 > [!NOTE]
 > Il est préférable de conserver ce nom.
+
+<br />
+
+### Les fichiers de configurations du projet
+Vous pouvez configurer celui-ci :
+* .env.local.example : dans le dossier ".docker/config/"
+
+> [!WARNING]
+> Ne pas modifier le fichier "**.env.local**" du dossier "**project/www**" qui sera et restera vide. 
 
 <br />
 
@@ -352,3 +363,8 @@ $ ./bin/server.sh start
 $ ./bin/server.sh stop
 $ ./bin/server.sh restart
 ```
+
+## En cas de problème lors d'installation
+Par exemple un problème d'adresse de port, comme l'image ci-dessous :
+<br /><img src="./images/screen742.jpg" alt="exemple angular server" width="300" height="175"><br />
+Pas de panique, modifier les ports et relancer l'installation.
