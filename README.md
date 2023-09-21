@@ -282,8 +282,10 @@ Options:
 $ ./bin/container_info.sh --mailhog
 ```
 <br />
+
 > [!WARNING]
 > Il contient beaucoup d'information sous un format json et ce n'est pas facile de le lire sur le terminal, il est préférable de le mettre dans un fichier json.
+
 <br />
 Pour mettre les informations dans un fichier json :
 ```
