@@ -52,7 +52,10 @@ La base docker pour un projet en symfony. Ceci est une base, vous pouvez le modi
 > Vous devez installer docker pour pouvoir l'utiliser.
 
 <br />
-Vous devez placer votre code dans le dossier "**project/www/**".
+Vous devez placer votre code dans le dossier "**project/www/**". <br /> 
+
+> [!NOTE]
+> Le serveur démarre automatique au démarrage du conteneur, vous n'avez normalement pas besoin de le démarrer par vous-même.
 
 ### L'avantage d'utiliser docker
 Lorsque vous faites un projet avec docker vous devez transmettre la totalité du projet, les fichiers de création des conteneurs et le code. Pour ce projet, vous devez transmettre le contenu en totalité du dossier "**domasym**" (**que vous pouvez et surtout, devez le renommer au nom de votre projet**) dans un git.<br />

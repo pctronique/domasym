@@ -15,6 +15,7 @@ services:
             - ./projecttmp/logs/php:/var/log/php:rw
             - ./projecttmp/tmp/php:/var/tmp/php:rw
             - ./projecttmp/logs/symfony:/var/log/symfony:rw
+            - ./projecttmp/logs/symfonyd:/root/.symfony5/log/:rw
             - ./.docker/symfony/startserver:/etc/init.d/startserver:rw
             - ./.docker/symfony/updateProject.sh:/home/updateProject.sh:rw
             - ./.docker/symfony/updateProjectStart.sh:/home/updateProjectStart.sh:rw
