@@ -17,7 +17,7 @@ then
     echo "   --phpmyadmin"
     echo "   --mailhog"
     echo "   --helps"
-    echo " [id ou nom du conteneur]"
+    echo "   [id ou nom du conteneur]"
 else
     container=$1
     case "$container" in

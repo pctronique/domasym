@@ -1,4 +1,5 @@
 # domasym (DOcker MAriadb SYMfony)
+Par [pctronique](https://pctronique.fr/) <br />
 Version 1.0.0
 
 <details>
@@ -250,7 +251,7 @@ $ ./bin/terminal.sh
 ```
 
 ### Dans Dockerfile
-Quand vous installez un package, vous devez aussi le rajouter dans le fichier "**.docker/linux_agcc/Dockerfile**", pour le conserver. Au niveau des "**apt install**".
+Quand vous installez un package, vous devez aussi le rajouter dans le fichier "**.docker/symfony/Dockerfile**", pour le conserver. Au niveau des "**apt install**".
 ```
 RUN apt install name_package
 ```
@@ -260,9 +261,9 @@ Vous pouvez avoir besoin de visualiser les logs d'un conteneur si celui-ci ne d√
 ```
 $ ./bin/container_logs.sh
 Options:
-   --nodejs
-   --mongo
-   --mongo-express
+   --php
+   --mariadb
+   --phpmyadmin
    --mailhog
    --helps
    [id ou nom du conteneur]
@@ -272,9 +273,9 @@ Vous pouvez avoir besoin d'information sur l'un des conteneurs, pour trouver sa 
 ```
 $ ./bin/container_info.sh 
 Options:
-   --nodejs
-   --mongo
-   --mongo-express
+   --php
+   --mariadb
+   --phpmyadmin
    --mailhog
    --helps
    [id ou nom du conteneur]
