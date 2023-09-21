@@ -1,3 +1,12 @@
+./bin/install/start_install.sh
+
+#./bin/message.sh
+
+if [ ! -e .env ]
+then
+    exit 1
+fi
+
 # creation des tmp du docker
 mkdir -p projecttmp/sgbd_data
 mkdir -p projecttmp/tmp
@@ -17,27 +26,14 @@ touch projecttmp/logs/symfony/error.log
 chmod 777 -R project
 chmod 777 -R projecttmp
 
- # creation du fichier .gitignore
-if [ ! -e project/.gitignore ]
-then
-    cp .docker/config/gitignore_symphony project/.gitignore
-fi
-
- # creation du fichier env.local.example
-if [ ! -e project/.env.local.example ]
-then
-    cp .docker/config/env.local.example project/.env.local.example
-fi
-
-# creation du fichier .env
-if [ ! -e .env ]
-then
-    cp .env.example .env
-fi
-
 # creation du docker du projet
 docker-compose up -d
 
-./bin/createProject.sh
-#./bin/updateProject.sh
-./start.sh
+# creation du docker du projet
+if docker-compose up -d ; then
+    ./bin/createProject.sh
+    #./bin/updateProject.sh
+    ./start.sh
+
+    ./bin/install/end_install.sh
+fi
