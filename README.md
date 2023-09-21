@@ -250,7 +250,7 @@ $ ./bin/terminal.sh
 ```
 
 ### Dans Dockerfile
-Quand vous installez un package, vous devez aussi le rajouter dans le fichier "**.docker/linux_agcc/Dockerfile**", pour le conserver. Au niveau des "**apt install**".
+Quand vous installez un package, vous devez aussi le rajouter dans le fichier "**.docker/symfony/Dockerfile**", pour le conserver. Au niveau des "**apt install**".
 ```
 RUN apt install name_package
 ```
