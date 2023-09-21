@@ -13,6 +13,7 @@ Version 1.0.0
             <li><a href="#conteneur-phpmyadmin">Conteneur phpmyadmin</a></li>
             <li><a href="#conteneur-mariadb">Conteneur mariadb</a></li>
             <li><a href="#conteneurs-sgbd">Conteneurs SGBD</a></li>
+            <li><a href="#les-fichiers-de-configurations">Les fichiers de configurations</a></li>
         </ul>
     </li>
     <li>
@@ -116,6 +117,12 @@ Ici je vais présenter quelques conteneurs SGBD et leurs visionneurs sous le for
 | [mongo](https://hub.docker.com/_/mongo) | [mongo-express](https://hub.docker.com/r/mailhog/mailhog/) |
 
 Ceci est une petite partie des [SGBD](https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_base_de_donn%C3%A9es), vous pouvez vérifier la disponibilité de votre SGBD dans [docker hub](https://hub.docker.com/).
+
+### Les fichiers de configurations
+Vous pouvez configurer votre serveur ou le php :
+* php.ini : dans le dossier ".docker/php/"
+> [!WARNING]
+> Si vous modifiez les configurations, il faudra redémarrer le conteneur : " [Server start|stop|restart](#server-start-stop-restart) ". 
 
 ## Création du conteneur (Docker)
 Vous devez avoir installé Docker. 
