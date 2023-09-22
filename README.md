@@ -196,7 +196,7 @@ $ ./install.sh
 ```
 
 > [!WARNING]
-> Ne surtout pas faire la commande '$ docker-compose up -d'.
+> Ne surtout pas faire la commande '$ docker-compose up --build -d'.
 
 ### Modifier les versions
 > [!WARNING]
