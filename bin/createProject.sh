@@ -8,5 +8,5 @@ docker exec $NAME_SYMFONY_CONTAINER bash -c "cd $FOLDER_PROJECT_SYMFONY/ && comp
 docker exec $NAME_SYMFONY_CONTAINER bash -c "cd $FOLDER_PROJECT_SYMFONY/ && composer require symfony/sendgrid-mailer"
 docker exec $NAME_SYMFONY_CONTAINER bash -c "cd $FOLDER_PROJECT_SYMFONY/ && composer require symfony/maker-bundle --dev"
 docker exec $NAME_SYMFONY_CONTAINER bash -c "cd $FOLDER_PROJECT_SYMFONY/ && composer require symfony/orm-pack --dev --with-all-dependencies"
-docker exec $NAME_SYMFONY_CONTAINER bash -c "cd $FOLDER_PROJECT_SYMFONY/ && symfony console doctrine:database:create"
+docker exec $NAME_SYMFONY_CONTAINER bash -c "cd $FOLDER_PROJECT_SYMFONY/ && php bin/console doctrine:database:create"
 docker exec $NAME_SYMFONY_CONTAINER bash -c "chmod 777 -R $FOLDER_PROJECT_SYMFONY"
