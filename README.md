@@ -195,6 +195,9 @@ Vous pouvez créer votre conteneur.
 $ ./install.sh
 ```
 
+> [!WARNING]
+> Ne surtout pas faire la commande '$ docker-compose up -d'.
+
 ### Modifier les versions
 > [!WARNING]
 > Il est indispensable de le faire pour pouvoir utiliser un conteneur identique des années plus tard. Surtout pour le conteneur qui contient le code.

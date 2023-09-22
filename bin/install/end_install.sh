@@ -4,7 +4,7 @@ FILE_CREATE=".\/bin\/createProject.sh"
 FILE_UPDATE=".\/bin\/updateProject.sh"
 FILE_START=".\/bin\/install\/start_install.sh"
 FILE_END=".\/bin\/install\/end_install.sh"
-FILE_MESSAGE=".\/bin\/message.sh"
+FILE_MESSAGE=".\/bin\/install\/message.sh"
 DESACTIVE="#"
 FILE="${0%/*}/../../install.sh"
 

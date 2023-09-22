@@ -1,6 +1,6 @@
 ./bin/install/start_install.sh
 
-#./bin/message.sh
+#./bin/install/message.sh
 
 if [ ! -e .env ]
 then
