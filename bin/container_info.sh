@@ -22,19 +22,19 @@ else
     container=$1
     case "$container" in
         --php)
-            container=$NAME_SYMFONY_CONTAINER
+            container=$NAME_PROJECT_CONTAINER
             ;;
     
         --mariadb)
-            container=$NAME_MARIABD_CONTAINER
+            container=$NAME_SGBD_CONTAINER
             ;;
 
         --phpmyadmin)
-            container=$NAME_PHPMYADMIN_CONTAINER
+            container=$NAME_SGBD_DISPLAY_CONTAINER
             ;;
 
         --mailhog)
-            container=$NAME_MAILHOG_CONTAINER
+            container=$NAME_MAIL_DISPLAY_CONTAINER
             ;;
     esac
 

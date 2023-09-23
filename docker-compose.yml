@@ -7,7 +7,7 @@ services:
 # Setup the PHP container
 ###########################
     symfony:
-        container_name: ${NAME_SYMFONY_CONTAINER}
+        container_name: ${NAME_PROJECT_CONTAINER}
         restart: always
         build: ./.docker/symfony/
         volumes:
@@ -24,15 +24,15 @@ services:
             - ./.env:/home/.env:rw
             #- ./.docker/config/.env.local.example:/home/project/www/.env.local:ro
         ports:
-            - ${VALUE_SYMFONY_PORT}:8000
+            - ${VALUE_PROJECT_PORT}:8000
             
 
 ###########################
 # Setup the Database (MariaDB) container
 ###########################
     mariadb:
-        container_name: ${NAME_MARIABD_CONTAINER}
-        image: mariadb:${VALUE_MARIABD_VERSION}
+        container_name: ${NAME_SGBD_CONTAINER}
+        image: mariadb:${VALUE_SGBD_VERSION}
         restart: always
         volumes:
             - ./projecttmp/logs/sgbd:/var/log/mysql:rw
@@ -52,8 +52,8 @@ services:
 # Setup the PhpMyAdmin container
 ###########################
     phpmyadmin:
-        container_name: ${NAME_PHPMYADMIN_CONTAINER}
-        image: phpmyadmin/phpmyadmin:${VALUE_PHPMYADMIN_VERSION}
+        container_name: ${NAME_SGBD_DISPLAY_CONTAINER}
+        image: phpmyadmin/phpmyadmin:${VALUE_SGBD_DISPLAY_VERSION}
         restart: always
         environment:
             - PMA_PORT=3306
@@ -61,7 +61,7 @@ services:
             - PMA_USER=${SGBD_ROOT_USERNAME}
             - PMA_PASSWORD=${SGBD_ROOT_PASSWORD}
         ports:
-            - ${VALUE_PHPMYADMIN_PORT}:80
+            - ${VALUE_SGBD_DISPLAY_PORT}:80
         depends_on: 
             - mariadb
             
@@ -69,9 +69,9 @@ services:
 # Setup the mailhog container
 ###########################
     mailhog:
-        container_name: ${NAME_MAILHOG_CONTAINER}
-        image: mailhog/mailhog:${VALUE_MAILHOG_VERSION}
+        container_name: ${NAME_MAIL_DISPLAY_CONTAINER}
+        image: mailhog/mailhog:${VALUE_MAIL_DISPLAY_VERSION}
         restart: always
         ports:
-            - ${VALUE_MAILHOG_DISPLAY_PORT}:8025
+            - ${VALUE_MAIL_DISPLAY_DISPLAY_PORT}:8025
             

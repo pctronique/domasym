@@ -4,11 +4,11 @@ do
 done < ${0%/*}/../.env
 
 d_start () {
-   docker exec $NAME_SYMFONY_CONTAINER bash -c "service startserver start"
+   docker exec $NAME_PROJECT_CONTAINER bash -c "service startserver start"
 }
 
 d_stop () {
-   docker exec $NAME_SYMFONY_CONTAINER bash -c "service startserver stop"
+   docker exec $NAME_PROJECT_CONTAINER bash -c "service startserver stop"
 }
  
 d_restart () {
@@ -17,7 +17,7 @@ d_restart () {
 }
 
 d_log () {
-   docker exec $NAME_SYMFONY_CONTAINER bash -c "service startserver log"
+   docker exec $NAME_PROJECT_CONTAINER bash -c "service startserver log"
 }
 
 option=$1
