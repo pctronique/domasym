@@ -20,7 +20,7 @@ services:
             - ./.docker/symfony/updateProject.sh:/home/updateProject.sh:rw
             - ./.docker/symfony/updateProjectStart.sh:/home/updateProjectStart.sh:rw
             - ./.docker/symfony/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
-            - ./.docker/symfony/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+            #- ./.docker/symfony/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
             - ./.env:/home/.env:rw
             #- ./.docker/config/.env.local.example:/home/project/www/.env.local:ro
         ports:
@@ -39,10 +39,10 @@ services:
             - ./projecttmp/tmp/sgbd:/var/tmp/mysql:rw
             - ./projecttmp/sgbd_data:/var/lib/mysql
             - ./.docker/mariadb/mariadb.cnf:/etc/mysql/conf.d/mariadb.cnf:ro
-            - ./.docker/sgbd_data/0000_phpmyadmin.sql:/docker-entrypoint-initdb.d/0000_phpmyadmin.sql
-            # start data
-            - ./.docker/sgbd_data/0001_domasym.sql:/docker-entrypoint-initdb.d/0001_domasym.sql
-            # stop data
+            - ./config/sgbd_data/0000_default.sql:/docker-entrypoint-initdb.d/0000_default.sql
+            # start sql
+            - ./config/sgbd_data/0001_people.sql:/docker-entrypoint-initdb.d/0001_people.sql
+            # stop sql
         environment:
             - MYSQL_ROOT_PASSWORD=${SGBD_ROOT_PASSWORD}
         entrypoint:
@@ -73,5 +73,5 @@ services:
         image: mailhog/mailhog:${VALUE_MAIL_DISPLAY_VERSION}
         restart: always
         ports:
-            - ${VALUE_MAIL_DISPLAY_DISPLAY_PORT}:8025
+            - ${VALUE_MAIL_DISPLAY_PORT}:8025
             

@@ -1,10 +1,36 @@
-./bin/install/start_install.sh
+#!/bin/bash
+case "$1" in
+  --del-port)
+    rm -f -r "${0%/*}/.env"
+    ;;
+   
+  --help)
+    echo "$ .install.sh"
+    echo "Ou"
+    echo "$ .install.sh [option]"
+    echo "Options:"
+    echo "   --del-port : Pour modifier le numéros des ports."
+    echo "   --helps    : Pour afficher l'aide."
+    exit 0
+    ;;
 
-#./bin/install/message.sh
+esac
 
-if [ ! -e .env ]
+if [ ! -e ${0%/*}/.env ]
 then
+  if ! ${0%/*}/bin/install/create_env_exp.sh ; then
     exit 1
+  fi
+fi
+
+if [ -e ${0%/*}/install_tmp/type_install ]
+then
+  while read line  
+  do   
+    export $line
+  done < ${0%/*}/install_tmp/type_install
+else
+  TYPE_INSTALL_PROJECT="update"
 fi
 
 # creation des tmp du docker
@@ -23,14 +49,29 @@ touch projecttmp/logs/symfony/symfony_error.log
 touch projecttmp/logs/symfony/error.log
 
 # modifier les droits sur les dossiers
-chmod 777 -R project
-chmod 777 -R projecttmp
+rm -f -r "/tmp/error_chmod_docker.log"
+chmod 777 -R ${0%/*}/project 2> /tmp/error_chmod_docker.log
+chmod 777 -R ${0%/*}/projecttmp 2> /tmp/error_chmod_docker.log
+rm -f -r "/tmp/error_chmod_docker.log"
 
 # creation du docker du projet
 if docker-compose up --build -d ; then
-    ./bin/createProject.sh
-    #./bin/updateProject.sh
-    ./start.sh
 
-    ./bin/install/end_install.sh
+  if [ $TYPE_INSTALL_PROJECT = "install" ]
+  then
+    if ! ${0%/*}/bin/createProject.sh ; then
+      exit 1
+    fi
+  else
+    if ! ${0%/*}/bin/updateProject.sh ; then
+      exit 1
+    fi
+  fi
+
+  ${0%/*}/start.sh
+
+  rm -f -r "${0%/*}/install_tmp"
+
+  ${0%/*}/bin/install/display_web.sh
+
 fi

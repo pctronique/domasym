@@ -1,14 +1,23 @@
+#!/bin/bash
+if ! ${0%/*}/install/message_create_container.sh ; then
+   exit 1
+fi
+
 while read line  
 do   
    export $line
 done < ${0%/*}/../.env
 
 d_start () {
+   rm -f -r "/tmp/mess_project_docker.log"
    docker container start $NAME_PROJECT_CONTAINER
+   rm -f -r "/tmp/mess_project_docker.log"
 }
 
 d_stop () {
+   rm -f -r "/tmp/mess_project_docker.log"
    docker container stop $NAME_PROJECT_CONTAINER
+   rm -f -r "/tmp/mess_project_docker.log"
 }
  
 d_restart () {
@@ -26,33 +35,26 @@ then
     option="--helps"
 fi
 
-if [[ "$option" = "--helps" ]]
-then
-    echo "Options:"
-    echo "   start"
-    echo "   stop"
-    echo "   restart"
-    echo "   reload"
-    echo "   log"
-    echo "   --helps"
-else
-   case "$1" in
-      start|stop)
-         d_${1}
-         ;;
+case "$1" in
+   start|stop|log)
+      d_${1}
+      ;;
    
-      restart|reload)
-         d_restart
-         ;;
+   restart|reload)
+      d_restart
+      ;;
+   
+   *)
+      echo "$ .server.sh [option]"
+      echo "Options:"
+      echo "   start      : Pour démarrer le serveur."
+      echo "   stop       : Pour arrêter le serveur."
+      echo "   restart    : Pour redémarrer le serveur."
+      echo "   reload     : Pour redémarrer le serveur."
+      echo "   log        : Afficher les logs."
+      echo "   --helps    : Pour afficher l'aide."
+      ;;
 
-      log)
-         d_log
-         ;;
+esac
 
-      *)
-         echo "Usage: ./bin/server.sh {start|stop|restart|reload|log|helps}"
-         exit 1
-         ;;
-
-   esac
-fi
+exit 0

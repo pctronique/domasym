@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo service openvpn stop
 docker network prune -f
 sudo service openvpn stop

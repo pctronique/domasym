@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `domasym`
+-- Base de données : `dbname`
 --
-CREATE DATABASE IF NOT EXISTS `domasym` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
-USE `domasym`;
+CREATE DATABASE IF NOT EXISTS `dbname` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
+USE `dbname`;
 
 -- --------------------------------------------------------
 

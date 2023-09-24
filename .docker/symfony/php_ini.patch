@@ -1,0 +1,59 @@
+--- /opt/pctronique/dev/git_school/def_docker/new/php.ini
++++ /opt/pctronique/dev/git_school/def_docker/old/php.ini
+@@ -486,7 +486,7 @@
+ ; Development Value: E_ALL
+ ; Production Value: E_ALL & ~E_DEPRECATED & ~E_STRICT
+ ; https://php.net/error-reporting
+-error_reporting = E_ALL
++error_reporting = E_ALL & ~E_STRICT & ~E_DEPRECATED;
+ 
+ ; This directive controls whether or not and where PHP will output errors,
+ ; notices and warnings too. Error output is very useful during development, but
+@@ -556,7 +556,7 @@
+ ; the error message is formatted as HTML or not.
+ ; Note: This directive is hardcoded to Off for the CLI SAPI
+ ; https://php.net/html-errors
+-;html_errors = On
++html_errors = On
+ 
+ ; If html_errors is set to On *and* docref_root is not empty, then PHP
+ ; produces clickable error messages that direct to a page describing the error
+@@ -590,9 +590,9 @@
+ ; empty.
+ ; https://php.net/error-log
+ ; Example:
+-;error_log = php_errors.log
++error_log = /var/log/php/php_errors.log
+ ; Log errors to syslog (Event Log on Windows).
+-;error_log = syslog
++error_log = syslog
+ 
+ ; The syslog ident is a string which is prepended to every message logged
+ ; to syslog. Only used when error_log is set to syslog.
+@@ -846,7 +846,7 @@
+ ; Temporary directory for HTTP uploaded files (will use system default if not
+ ; specified).
+ ; https://php.net/upload-tmp-dir
+-;upload_tmp_dir =
++upload_tmp_dir = /var/tmp/php/
+ 
+ ; Maximum allowed size for uploaded files.
+ ; https://php.net/upload-max-filesize
+@@ -975,6 +975,7 @@
+ ; Defines the default timezone used by the date functions
+ ; https://php.net/date.timezone
+ ;date.timezone =
++date.timezone = Europe/Paris
+ 
+ ; https://php.net/date.default-latitude
+ ;date.default_latitude = 31.7667
+@@ -1183,7 +1184,7 @@
+ ; Default socket name for local MySQL connects.  If empty, uses the built-in
+ ; MySQL defaults.
+ ; https://php.net/mysqli.default-socket
+-mysqli.default_socket =
++mysqli.default_socket = /var/tmp/php/mysql.sock
+ 
+ ; Default host for mysqli_connect() (doesn't apply in safe mode).
+ ; https://php.net/mysqli.default-host
+

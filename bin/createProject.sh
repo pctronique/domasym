@@ -1,7 +1,17 @@
+#!/bin/bash
+if ! ${0%/*}/install/message_create_container.sh ; then
+   exit 1
+fi
+
 while read line  
 do   
    export $line
 done < ${0%/*}/../.env
+
+if ! ${0%/*}/install/php_create_config.sh ; then
+  exit 1
+fi
+
 docker exec $NAME_PROJECT_CONTAINER bash -c "symfony new $FOLDER_PROJECT --no-git $@"
 ${0%/*}/install/in_install.sh
 docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && composer require symfony/mailer"
