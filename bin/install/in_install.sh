@@ -5,8 +5,8 @@ do
    export $line
 done < ${0%/*}/../../.env
 
-LINE1="- .\/.docker\/config\/.env.local.example:\/home\/project\/www\/.env.local:ro"
-LINE1_REPLACE="- .\/.docker\/config\/.env.local.example:\/home\/project\/$FOLDER_PROJECT\/.env.local:ro"
+LINE1="- .\/config\/.env.local:\/home\/project\/www\/.env.local:ro"
+LINE1_REPLACE="- .\/config\/.env.local:\/home\/project\/$FOLDER_PROJECT\/.env.local:ro"
 DESACTIVE="#"
 FILE="${0%/*}/../../docker-compose.yml"
 
