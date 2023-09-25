@@ -10,13 +10,13 @@ done < ${0%/*}/../.env
 
 d_start () {
    rm -f -r "/tmp/mess_project_docker.log"
-   docker container start $NAME_PROJECT_CONTAINER
+   docker container start $NAME_PROJECT_CONTAINER >> /tmp/mess_project_docker.log
    rm -f -r "/tmp/mess_project_docker.log"
 }
 
 d_stop () {
    rm -f -r "/tmp/mess_project_docker.log"
-   docker container stop $NAME_PROJECT_CONTAINER
+   docker container stop $NAME_PROJECT_CONTAINER >> /tmp/mess_project_docker.log
    rm -f -r "/tmp/mess_project_docker.log"
 }
  
