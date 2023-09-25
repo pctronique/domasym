@@ -22,7 +22,7 @@ services:
             - ./.docker/symfony/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
             #- ./.docker/symfony/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
             - ./.env:/home/.env:rw
-            - ./config/.env.local:/home/project/www/.env.local:ro
+            #- ./config/.env.local:/home/project/www/.env.local:ro
         ports:
             - ${VALUE_PROJECT_PORT}:8000
             

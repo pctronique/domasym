@@ -5,7 +5,7 @@ fi
 
 FOLDER_BASE="${0%/*}/../.."
 FOLDER_ENV_DEF="$FOLDER_BASE/.docker/file_env"
-FOLDER_ENV_TMP="$FOLDER_BASE/install_tmp"
+FOLDER_ENV_TMP="$FOLDER_BASE/tmp_install"
 ENV_DEF="$FOLDER_ENV_DEF/.env"
 FILE_EXP="$FOLDER_BASE/.env.example"
 FILE_ENV="$FOLDER_BASE/.env"

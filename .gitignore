@@ -1,7 +1,9 @@
-/projecttmp/
+/.env
+/projecttmp
+/tmp_install
+/install_tmp
 /project/www/.env.local
 /project/www/.env.local.php
 /project/www/.env.*.local
 /project/www/var/
 /project/www/vendor/
-/.env

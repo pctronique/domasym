@@ -18,14 +18,18 @@ do
    export $line
 done < "$FOLDER_BASE/.env"
 
-REAL_PATH_FILE=$(realpath $0)
-REAL_PATH="${REAL_PATH_FILE/\/php_create_config.sh/}"
+#REAL_PATH_FILE=$(realpath $0)
+#REAL_PATH="${REAL_PATH_FILE/\/php_create_config.sh/}"
+
+cd "${0%/*}/../.."
 
 docker exec $NAME_PROJECT_CONTAINER bash -c "cp /usr/local/etc/php/php.ini-development /var/tmp/php"
-cp "$REAL_PATH/../../projecttmp/tmp/php/php.ini-development" "$REAL_PATH/../../.docker/$DOCKER_FOLDER_PROJECT/php.ini-development"
-cp "$REAL_PATH/../../projecttmp/tmp/php/php.ini-development" "$REAL_PATH/../../.docker/$DOCKER_FOLDER_PROJECT/php.ini"
-patch "$REAL_PATH/../../.docker/$DOCKER_FOLDER_PROJECT/php.ini" < "$REAL_PATH/../../.docker/$DOCKER_FOLDER_PROJECT/php_ini.patch"
+cp "./projecttmp/tmp/php/php.ini-development" "./.docker/$DOCKER_FOLDER_PROJECT/php.ini-development"
+cp "./projecttmp/tmp/php/php.ini-development" "./.docker/$DOCKER_FOLDER_PROJECT/php.ini"
+patch "./.docker/$DOCKER_FOLDER_PROJECT/php.ini" < "./.docker/$DOCKER_FOLDER_PROJECT/php_ini.patch"
 
-sed -i "s/#- .\/.docker\/symfony\/php.ini:\/usr\/local\/etc\/php\/conf.d\/php.ini:ro/- .\/.docker\/symfony\/php.ini:\/usr\/local\/etc\/php\/conf.d\/php.ini:ro/" "$REAL_PATH/../../docker-compose.yml" 
+sed -i "s/#- .\/.docker\/symfony\/php.ini:\/usr\/local\/etc\/php\/conf.d\/php.ini:ro/- .\/.docker\/symfony\/php.ini:\/usr\/local\/etc\/php\/conf.d\/php.ini:ro/" "./docker-compose.yml" 
+
+cd "${0%/*}"
 
 exit 0

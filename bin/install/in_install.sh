@@ -14,5 +14,5 @@ cp ${0%/*}/../../.docker/config/.gitignore ${0%/*}/../../project/www/.gitignore
 
 sed -i "s/$DESACTIVE$LINE1/$LINE1_REPLACE/" $FILE
 
-cd ${0%/*}/../../
-docker-compose up -d
+#cd ${0%/*}/../../
+#docker compose up -d

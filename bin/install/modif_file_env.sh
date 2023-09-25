@@ -6,7 +6,7 @@ then
 fi
 
 FOLDER_BASE="${0%/*}/../.."
-FOLDER_ENV_TMP="$FOLDER_BASE/install_tmp"
+FOLDER_ENV_TMP="$FOLDER_BASE/tmp_install"
 
 while read LINE
 do  
