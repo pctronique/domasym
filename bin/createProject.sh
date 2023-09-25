@@ -30,4 +30,6 @@ docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && composer req
 docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && composer require symfony/sendgrid-mailer"
 docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && composer require symfony/maker-bundle --dev"
 docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && composer require symfony/orm-pack --dev --with-all-dependencies"
-#docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && php bin/console doctrine:database:create"
+if ! docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && php bin/console doctrine:database:create" ; then
+   exit 0
+fi
