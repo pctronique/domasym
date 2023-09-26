@@ -1,0 +1,4 @@
+symfony/mailer
+symfony/sendgrid-mailer
+symfony/maker-bundle --dev
+symfony/orm-pack --dev --with-all-dependencies

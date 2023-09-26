@@ -32,18 +32,19 @@ if ! docker compose up -d ; then
   exit 1
 fi
 
-if ! ${0%/*}/project_bash.sh "cd $FOLDER_PROJECT/ && composer require symfony/mailer" ; then
-  exit 1
+if [ -e ${0%/*}/packages_install.list ]
+then
+  while read line  
+  do   
+    if [ ! -z "$line" ]
+    then
+      if ! ${0%/*}/project_bash.sh "cd $FOLDER_PROJECT/ && composer require $line" ; then
+        exit 1
+      fi
+    fi
+  done < ${0%/*}/packages_install.list
 fi
-if ! ${0%/*}/project_bash.sh "cd $FOLDER_PROJECT/ && composer require symfony/sendgrid-mailer" ; then
-  exit 1
-fi
-if ! ${0%/*}/project_bash.sh "cd $FOLDER_PROJECT/ && composer require symfony/maker-bundle --dev" ; then
-  exit 1
-fi
-if ! ${0%/*}/project_bash.sh "cd $FOLDER_PROJECT/ && composer require symfony/orm-pack --dev --with-all-dependencies" ; then
-  exit 1
-fi
+
 if ! ${0%/*}/project_bash.sh "cd $FOLDER_PROJECT/ && php bin/console doctrine:database:create" ; then
    exit 0
 fi
