@@ -360,12 +360,12 @@ Vous pouvez configurer celui-ci :
 <br />
 
 ### Packages installés dans le mini-projet
-Lors de la création du projet, il y a l'installation de package que vous pouvez retrouver dans le fichier "**./bin/createProject.sh**"
+Lors de la création du projet, il y a l'installation de package que vous pouvez retrouver dans le fichier "**./bin/install/packages_install.list**"
 ```
-docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && composer require symfony/mailer"
-docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && composer require symfony/sendgrid-mailer"
-docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && composer require symfony/maker-bundle --dev"
-docker exec $NAME_PROJECT_CONTAINER bash -c "cd $FOLDER_PROJECT/ && composer require symfony/orm-pack --dev --with-all-dependencies"
+symfony/mailer
+symfony/sendgrid-mailer
+symfony/maker-bundle --dev
+symfony/orm-pack --dev --with-all-dependencies
 ```
 > [!NOTE]
 > Vous pouvez les retirer si vous en avez pas besoin.
