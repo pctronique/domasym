@@ -98,10 +98,10 @@ Ce conteneur va vous permettre de visualiser votre base de données mariadb (SQL
 Il est conçu à partir de l'image du [docker mariadb](https://hub.docker.com/_/mariadb).<br />
 Ce conteneur contiendra votre base de donnée. Il est possible de visualiser son contenu à partir du [conteneur phpmyadmin](#conteneur-phpmyadmin)<br />
 Il est possible d'entrer des tables lors de sa création, pour se faire il faudra récupérer les tables sous format sql et les placer dans un dossier et modifier le fichier "**docker-compose.yml**".<br />
-J'ai mis en place un exemple avec la table people "**0001_domasym.sql**" :
+J'ai mis en place un exemple avec la table people "**0001_people.sql**" :
 ```
 # start data
-- ./config/sgbd_data/0001_domasym.sql:/docker-entrypoint-initdb.d/0001_domasym.sql
+- ./config/sgbd_data/0001_people.sql:/docker-entrypoint-initdb.d/0001_people.sql
 # stop data
 ```
 <br /><img src="./images/screen72.jpg" alt="exemple nodejs server" width="300" height="175"><br />
