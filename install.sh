@@ -62,6 +62,9 @@ if docker compose up -d ; then
     if ! ${0%/*}/bin/install/createProject.sh ; then
       exit 1
     fi
+    if ! ${0%/*}/bin/version/recup_all_version.sh ; then
+      exit 1
+    fi
   else
     if ! ${0%/*}/bin/install/updateProject.sh ; then
       exit 1
