@@ -38,6 +38,7 @@ mkdir -p projecttmp/sgbd_data
 mkdir -p projecttmp/tmp
 mkdir -p projecttmp/tmp/php
 mkdir -p projecttmp/tmp/sgbd
+mkdir -p projecttmp/tmp/symfony
 mkdir -p projecttmp/logs
 mkdir -p projecttmp/logs/symfony
 mkdir -p projecttmp/logs/symfonyd
