@@ -23,7 +23,9 @@ done < "$FOLDER_BASE/.env"
 
 cd "${0%/*}/../.."
 
-docker exec $NAME_PROJECT_CONTAINER bash -c "cp /usr/local/etc/php/php.ini-development /var/tmp/php"
+if ! docker exec $NAME_PROJECT_CONTAINER bash -c "cp /usr/local/etc/php/php.ini-development /var/tmp/php" ; then
+    exit 1
+fi
 cp "./projecttmp/tmp/php/php.ini-development" "./.docker/$DOCKER_FOLDER_PROJECT/php.ini-development"
 cp "./projecttmp/tmp/php/php.ini-development" "./.docker/$DOCKER_FOLDER_PROJECT/php.ini"
 patch "./.docker/$DOCKER_FOLDER_PROJECT/php.ini" < "./.docker/$DOCKER_FOLDER_PROJECT/php_ini.patch"
