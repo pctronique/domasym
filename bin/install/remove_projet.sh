@@ -6,7 +6,10 @@ FOLDER_ENV_DEF="$FOLDER_DOCKER/file_env"
 
 while read line  
 do   
-   export $line
+    if [ ! -z "$line" ]
+    then
+        export $line
+    fi
 done < "$FOLDER_ENV_DEF/.env"
 
 rm -f -r "$FOLDER_DOCKER/$DOCKER_FOLDER_PROJECT/Dockerfile"
@@ -22,7 +25,10 @@ then
 
    while read line  
    do   
-      export $line
+      if [ ! -z "$line" ]
+      then
+         export $line
+      fi
    done < "$FOLDER_BASE/.env"
 
    rm -f -r "$FOLDER_BASE/project/$FOLDER_PROJECT"

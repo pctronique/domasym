@@ -6,7 +6,10 @@ ENV_DEF="$FOLDER_ENV_DEF/.env"
 
 while read line  
 do   
-  export $line
+    if [ ! -z "$line" ]
+    then
+        export $line
+    fi
 done < $ENV_DEF
 
 DEF_PROJECT_PORT="$DEF_ENV_PROJECT_PORT"

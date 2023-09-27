@@ -20,7 +20,10 @@ fi
 
 while read line  
 do   
-   export $line
+    if [ ! -z "$line" ]
+    then
+        export $line
+    fi
 done < $ENV_DEF
 
 rm -f "$FILE_ENV"

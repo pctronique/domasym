@@ -2,7 +2,10 @@
 
 while read line  
 do   
-   export $line
+   if [ ! -z "$line" ]
+   then
+      export $line
+   fi
 done < ${0%/*}/../../.env
 
 LINE1="- .\/config\/.env.local:\/home\/project\/www\/.env.local:ro"

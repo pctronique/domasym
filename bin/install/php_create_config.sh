@@ -10,12 +10,18 @@ FOLDER_ENV_DEF="$FOLDER_DOCKER/file_env"
 
 while read line  
 do   
-   export $line
+    if [ ! -z "$line" ]
+    then
+        export $line
+    fi
 done < "$FOLDER_ENV_DEF/.env"
 
 while read line  
 do   
-   export $line
+    if [ ! -z "$line" ]
+    then
+        export $line
+    fi
 done < "$FOLDER_BASE/.env"
 
 #REAL_PATH_FILE=$(realpath $0)

@@ -19,7 +19,10 @@ fi
 
 while read line  
 do   
-   export $line
+    if [ ! -z "$line" ]
+    then
+        export $line
+    fi
 done < $ENV_DEF
 
 IFS='/' read -r -a TAB1 <<< "$0"
@@ -97,7 +100,10 @@ case "$TYPE_EX" in
   update)
     while read line  
     do   
-      export $line
+      if [ ! -z "$line" ]
+      then
+          export $line
+      fi
     done < $1
     name=$NAME_PROJECT
     namedb=$SGBD_DATABASE

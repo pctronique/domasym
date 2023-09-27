@@ -5,7 +5,10 @@ fi
 
 while read line  
 do   
-   export $line
+    if [ ! -z "$line" ]
+    then
+        export $line
+    fi
 done < ${0%/*}/../../.env
 
 if ! ${0%/*}/php_create_config.sh ; then

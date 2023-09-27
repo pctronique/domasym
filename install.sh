@@ -26,8 +26,11 @@ fi
 if [ -e ${0%/*}/tmp_install/type_install ]
 then
   while read line  
-  do   
-    export $line
+  do
+    if [ ! -z "$line" ]
+    then
+      export $line
+    fi
   done < ${0%/*}/tmp_install/type_install
 else
   TYPE_INSTALL_PROJECT="update"

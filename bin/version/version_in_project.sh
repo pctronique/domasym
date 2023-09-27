@@ -5,7 +5,10 @@ FOLDER_ENV_DEF="$FOLDER_DOCKER/file_env"
 
 while read line  
 do   
-   export $line
+   if [ ! -z "$line" ]
+   then
+      export $line
+   fi
 done < $FOLDER_ENV_DEF/.env
 
 if ! ${0%/*}/../install/project_bash.sh "rm -r -f $PROJECT_TMP/recup_tmp_version.txt" ; then

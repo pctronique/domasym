@@ -12,7 +12,10 @@ fi
 
 while read line  
 do   
-   export $line
+    if [ ! -z "$line" ]
+    then
+        export $line
+    fi
 done < $FICHIER_ENV_EXA
 
 sed -i "s/dbname/$SGBD_DATABASE/" "$FILE_DATA/0000_default.sql"

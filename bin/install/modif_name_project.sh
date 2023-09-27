@@ -10,7 +10,10 @@ fi
 
 while read line  
 do   
-   export $line
+    if [ ! -z "$line" ]
+    then
+        export $line
+    fi
 done < $FICHIER_ENV_EXA
 
 #FILE_CONFIG="$FOLDER_BASE/project/$FOLDER_PROJECT/package.json"

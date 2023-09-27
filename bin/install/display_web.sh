@@ -7,7 +7,10 @@ FOLDER_BASE="${0%/*}/../.."
 
 while read line  
 do   
-   export $line
+    if [ ! -z "$line" ]
+    then
+        export $line
+    fi
 done < "$FOLDER_BASE/.env"
 
 NUM_PORT_PROJECT=""

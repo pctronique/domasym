@@ -1,6 +1,9 @@
 while read line  
 do   
-   export $line
+   if [ ! -z "$line" ]
+   then
+      export $line
+   fi
 done < ${0%/*}/../../.env
 #docker exec $NAME_PROJECT_CONTAINER bash -c "cp .env.local.example $FOLDER_PROJECT/.env.local"
 #docker exec $NAME_PROJECT_CONTAINER bash -c "chmod 777 $FOLDER_PROJECT/.env.local"
