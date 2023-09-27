@@ -54,7 +54,6 @@ RENUMB='^[0-9]+$'
 
 echo -e $TEXT_BOLD$COLOR_DEF_REP$'Pour la création des conteneurs du projet, il faut répondre à quelque question.'
 
-
 if ! ${0%/*}/create_env_name.sh "$FILE_EXP" ; then
   exit 1
 fi
