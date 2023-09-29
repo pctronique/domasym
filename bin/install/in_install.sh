@@ -1,4 +1,7 @@
 #!/bin/bash
+if ! ${0%/*}/message_create_container.sh ; then
+  exit 1
+fi
 
 while read line  
 do   

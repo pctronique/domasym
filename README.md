@@ -92,7 +92,7 @@ Ce conteneur va vous permettre de visualiser les emails transmis par votre proje
 ### Conteneur phpmyadmin
 Il est conçu à partir de l'image du [docker phpmyadmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/).<br />
 Ce conteneur va vous permettre de visualiser votre base de données mariadb (SQL).
-<br /><img src="./images/screen77.jpg" alt="exemple nodejs server" width="300" height="175"><br />
+<br /><img src="./images/screen71.jpg" alt="exemple nodejs server" width="300" height="175"><br />
 
 ### Conteneur mariadb
 Il est conçu à partir de l'image du [docker mariadb](https://hub.docker.com/_/mariadb).<br />
@@ -104,7 +104,7 @@ J'ai mis en place un exemple avec la table people "**0001_people.sql**" :
 - ./config/sgbd_data/0001_people.sql:/docker-entrypoint-initdb.d/0001_people.sql
 # stop data
 ```
-<br /><img src="./images/screen78.jpg" alt="exemple nodejs server" width="300" height="175"><br />
+<br /><img src="./images/screen72.jpg" alt="exemple nodejs server" width="300" height="175"><br />
 
 > [!NOTE]
 > Vous pouvez changer de SGBD pour un NOSQL. Pour les projet en php on utilise principalement un SGBD SQL.

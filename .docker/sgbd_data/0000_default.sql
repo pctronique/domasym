@@ -23,47 +23,6 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `dbname` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
 USE `dbname`;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `people`
---
-
-CREATE TABLE `people` (
-  `id` int(10) NOT NULL,
-  `firstname` varchar(100) NOT NULL DEFAULT '',
-  `lastname` varchar(100) NOT NULL DEFAULT '',
-  `views` int(10) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Déchargement des données de la table `people`
---
-
-INSERT INTO `people` (`id`, `firstname`, `lastname`, `views`) VALUES
-(1, 'Alan', 'Turing', 1250000);
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `people`
---
-ALTER TABLE `people`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `people`
---
-ALTER TABLE `people`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -70,11 +70,12 @@ done
 DEF_NAME_PROJECT="$NAME_PROJECT_RECUP"
 DEF_SGBD_DATABASE="$DEF_NAME_PROJECT"
 
-COLOR_QUESTION=$'\e[90m'
-COLOR_DEF_REP=$'\e[36m'
-TEXT_BOLD=$'\e[1m'
-TEXT_DEF=$'\e[0m'
-TEXT_COLOR_DEF=$'\e[39m'
+COLOR_QUESTION=$'\e'$INST_COLOR_QUESTION
+COLOR_DEF_REP=$'\e'$INST_COLOR_DEF_REP
+COLOR_ERROR_REP=$'\e'$INST_COLOR_ERROR_REP
+TEXT_BOLD=$'\e'$INST_TEXT_BOLD
+TEXT_DEF=$'\e'$INST_TEXT_DEF
+TEXT_COLOR_DEF=$'\e'$INST_TEXT_COLOR_DEF
 
 case "$TYPE_EX" in
   install)
@@ -86,6 +87,7 @@ case "$TYPE_EX" in
 
     if [ -z "$name" ] 
     then
+      echo -e $COLOR_ERROR_REP$'Merci d\'entrer un nom au projet.'$TEXT_COLOR_DEF
       exit 1
     fi
 
