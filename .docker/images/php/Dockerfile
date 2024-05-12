@@ -99,22 +99,22 @@ RUN crontab /etc/cron.d/dockercron
 # xdebug.
 RUN pecl install -o -f ${XDEBUG_VERSION} && rm -rf /tmp/pear
 COPY xdebug_extends.sh ${PHP_FOLDER_INIT}
-RUN chmod +x ${PHP_FOLDER_INIT}xdebug_extends.sh
-RUN ${PHP_FOLDER_INIT}xdebug_extends.sh
+RUN chmod +x ${PHP_FOLDER_INIT}/xdebug_extends.sh
+RUN ${PHP_FOLDER_INIT}/xdebug_extends.sh
 
 COPY importdata.sh ${PHP_FOLDER_INIT}
-RUN chmod +x ${PHP_FOLDER_INIT}importdata.sh
+RUN chmod +x ${PHP_FOLDER_INIT}/importdata.sh
 
 COPY createProject.sh ${PHP_FOLDER_INIT}
-RUN chmod +x ${PHP_FOLDER_INIT}createProject.sh
+RUN chmod +x ${PHP_FOLDER_INIT}/createProject.sh
 
 COPY packages_install.list ${PHP_FOLDER_INIT}
 
 COPY updateProject.sh ${PHP_FOLDER_INIT}
-RUN chmod +x ${PHP_FOLDER_INIT}updateProject.sh
+RUN chmod +x ${PHP_FOLDER_INIT}/updateProject.sh
 
 COPY createconnsgbd.sh ${PHP_FOLDER_INIT}
-RUN chmod +x ${PHP_FOLDER_INIT}createconnsgbd.sh
+RUN chmod +x ${PHP_FOLDER_INIT}/createconnsgbd.sh
 
 COPY docker-create-symfony-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-create-symfony-entrypoint.sh
