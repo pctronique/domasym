@@ -27,4 +27,6 @@ while inotifywait -e close_write /etc/cron.d/dockercron; do crontab /etc/cron.d/
 touch ${PHP_FOLDER_LOG}/cron.log
 cron && tail -f ${PHP_FOLDER_LOG}/cron.log &
 
+echo "end create project" >> ${PHP_FOLDER_LOG}/endcreate.log
+
 exec "$@"
