@@ -15,7 +15,7 @@ services:
                 - VALUE_MHSEND_VERSION=${VALUE_MHSENDMAIL_VERSION}
         volumes:
             - ./www/:/usr/local/apache2/www
-            - ./config/data:/docker-entrypoint-initdata.d:rw
+            #- ./config/data:/docker-entrypoint-initdata.d:rw
             - ./config/dockercron:/etc/cron.d/dockercron:rw
             - ./.docker/containers/php/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
             - ./.docker/containers/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
