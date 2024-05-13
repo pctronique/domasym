@@ -30,13 +30,13 @@ if [ -z "$(ls -A ${PHP_FOLDER_PROJECT})" ]; then
     do   
         if [ ! -z "$line" ]
         then
-            composer require $line 2&>> ${PHP_FOLDER_LOG}create.log
+            composer require $line >> ${PHP_FOLDER_LOG}create.log 2>> ${PHP_FOLDER_LOG}create.log
         fi
     done < ${PHP_FOLDER_INIT}/packages_install.list
     fi
 fi
 
-composer install
+composer install >> ${PHP_FOLDER_LOG}create.log 2>> ${PHP_FOLDER_LOG}create.log
 
 #php bin/console doctrine:database:create
 
