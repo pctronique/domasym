@@ -17,13 +17,13 @@ services:
             - ./www/:/usr/local/apache2/www
             - ./config/data:/docker-entrypoint-initdata.d:rw
             - ./config/dockercron:/var/docker/cron/dockercron:rw
-            - ./.docker/containers/php/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
-            - ./.docker/containers/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
-            - ./.docker/containers/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
-            - ./.docker/containers/php/mailhog.ini:/usr/local/etc/php/conf.d/mailhog.ini:ro
-            - ./.dockertmp/log/php:/var/log/docker/php:rw
+            - ./.docker/containers/symfony/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
+            - ./.docker/containers/symfony/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
+            - ./.docker/containers/symfony/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+            - ./.docker/containers/symfony/mailhog.ini:/usr/local/etc/php/conf.d/mailhog.ini:ro
+            - ./.dockertmp/log/symfony:/var/log/docker/php:rw
             - ./.dockertmp/log/xdebug:/var/log/docker/xdebug:rw
-            - ./.dockertmp/tmp/php:/var/tmp/docker/php:rw
+            - ./.dockertmp/tmp/symfony:/var/tmp/docker/php:rw
         ports:
             - ${VALUE_SYMFONY_PORT}:8000
         environment:
