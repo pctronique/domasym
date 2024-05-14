@@ -1,13 +1,13 @@
 
 services:
 ###########################
-# Setup the PHP container
+# Setup the symfony container
 ###########################
-    php:
-        container_name: ${NAME_PROJECT}_php
+    symfony:
+        container_name: ${NAME_PROJECT}_symfony
         restart: always
         build: 
-            context: ./.docker/images/php/
+            context: ./.docker/images/symfony/
             args:
                 - VALUE_PHP_VERSION=${VALUE_PHP_VERSION}
                 - VALUE_XDEBUG_VERSION=${VALUE_XDEBUG_VERSION}
@@ -15,8 +15,8 @@ services:
                 - VALUE_MHSEND_VERSION=${VALUE_MHSENDMAIL_VERSION}
         volumes:
             - ./www/:/usr/local/apache2/www
-            #- ./config/data:/docker-entrypoint-initdata.d:rw
-            - ./config/dockercron:/etc/cron.d/dockercron:rw
+            - ./config/data:/docker-entrypoint-initdata.d:rw
+            - ./config/dockercron:/var/docker/cron/dockercron:rw
             - ./.docker/containers/php/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
             - ./.docker/containers/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
             - ./.docker/containers/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
@@ -25,7 +25,7 @@ services:
             - ./.dockertmp/log/xdebug:/var/log/docker/xdebug:rw
             - ./.dockertmp/tmp/php:/var/tmp/docker/php:rw
         ports:
-            - ${VALUE_HTTPD_PORT}:8000
+            - ${VALUE_SYMFONY_PORT}:8000
         environment:
             - TZ=${VALUE_TIMEZONES}
             - PHP_FOLDER_DATA=data
