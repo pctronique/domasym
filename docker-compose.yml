@@ -28,7 +28,7 @@ services:
             - ${VALUE_SYMFONY_PORT}:8000
         environment:
             - TZ=${VALUE_TIMEZONES}
-            - PHP_FOLDER_DATA=data
+            - PHP_FOLDER_DATA=${FOLDER_DATA}
             - PHP_SGBD_DATABASE=${SGBD_DATABASE}
             - PHP_SGBD_PASSWORD=${SGBD_PASSWORD}
             - PHP_SGBD_USER=root
