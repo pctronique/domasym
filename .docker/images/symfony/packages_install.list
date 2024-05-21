@@ -7,3 +7,4 @@ symfony/runtime
 security
 form validator
 symfonycasts/verify-email-bundle
+symfony/profiler-pack
