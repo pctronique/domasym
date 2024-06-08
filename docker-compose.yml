@@ -14,7 +14,7 @@ services:
                 - VALUE_COMPOSER_VERSION=${VALUE_COMPOSER_VERSION}
                 - VALUE_MHSEND_VERSION=${VALUE_MHSENDMAIL_VERSION}
         volumes:
-            - ./www/:/usr/local/apache2/www
+            - ./www/:/home/www
             - ./config/data:/docker-entrypoint-initdata.d:rw
             - ./config/dockercron:/var/docker/cron/dockercron:rw
             - ./.docker/containers/symfony/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
