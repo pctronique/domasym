@@ -7,7 +7,7 @@ fi
 
 if [ -z ${PHP_FOLDER_PROJECT} ]
 then
-    PHP_FOLDER_PROJECT=/usr/local/apache2/www
+    PHP_FOLDER_PROJECT=/home/www
 fi
 
 if [ -z ${PHP_FOLDER_LOG} ]

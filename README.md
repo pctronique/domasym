@@ -1,4 +1,4 @@
-# damp : Docker Apache Mariadb Php
+# domasym : DOcker MAriadb SYMfony
 Par [pctronique](https://pctronique.fr/) <br />
 Version 1.1.0
 
@@ -58,6 +58,7 @@ Pour Windows, Linux et Mac.
 
 Les versions :
 <ul>
+  <li>symfony:7.0.7</li>
   <li>php:8.3.7RC1</li>
   <li>mariadb:10.4.18</li>
   <li>phpmyadmin:5.2.1</li>
@@ -81,7 +82,7 @@ Vous devez avoir installé [docker-desktop](https://www.docker.com/products/dock
 
 Modifier le nom du projet dans le fichier « .env.example » :
 ```
-NAME_PROJECT=projectphp
+NAME_PROJECT=domasym
 ```
 Mettre le nom du projet.
 
@@ -97,7 +98,7 @@ $ cp .env.example .env
 
 Il est possible de modifier les ports dans le fichier « .env » (il est préférable de conserver les ports par défaut dans l’exemple).
 ```
-VALUE_HTTPD_PORT=80
+VALUE_SYMFONY_PORT=8000
 VALUE_PHPMYADMIN_PORT=8080
 VALUE_MAILHOG_PORT=8020
 ```
@@ -111,14 +112,14 @@ VALUE_MAILHOG_PORT=8020
 > 
 > => 1 pour le projet 1
 > ```
-> VALUE_HTTPD_PORT=81
+> VALUE_SYMFONY_PORT=8001
 > VALUE_PHPMYADMIN_PORT=8081
 > VALUE_MAILHOG_PORT=8021
 > ```
 > 
 > => 2 pour le projet 2
 > ```
-> VALUE_HTTPD_PORT=82
+> VALUE_SYMFONY_PORT=8002
 > VALUE_PHPMYADMIN_PORT=8082
 > VALUE_MAILHOG_PORT=8022
 > ```
@@ -138,7 +139,7 @@ Le code devra être placé dans le dossier « www ».
 ## Config
 
 ### Configurations du SGBD du site
-Modifier le nom de la base de données dans le fichier « .env.example » et faire la modification dans le fichier « .env » (si celui-ci existe).
+Modifier le nom de la base de données dans les fichiers « ww/.env.local » (s'il existe), « .env.example » et faire la modification dans le fichier « .env » (si celui-ci existe).
 
 ```
 SGBD_DATABASE=project
@@ -153,7 +154,6 @@ Vous pouvez le modifier si besoin.
 ### php.ini et httpd.conf
 <ul>
   <li>Le fichier « php.ini » se trouve dans « .docker/containers/php/ ».</li>
-  <li>Le fichier « httpd.conf » se trouve dans « .docker/containers/apache/ ».</li>
 </ul>
 
 ### Xdebug
@@ -181,15 +181,9 @@ FOLDER_CONFIG=src/config
 
 Pas oublier de le modifier dans le fichier « .gitignore », pour ne pas transmettre les fichiers qui devront être seulement utilisé en local :
 ```
-/www/config/config_sgbd.php
-/www/config/filedotenv.php
-/www/config/.env
 ```
 Par le nouveau chemin :
 ```
-/www/src/config/config_sgbd.php
-/www/src/config/filedotenv.php
-/www/src/config/.env
 ```
 
 > [!WARNING]
@@ -246,7 +240,7 @@ Vous devez les placer dans le fichier « ./config/dockercron ».
 Exemple (dans « ./config/dockercron ») :
 ```
 *  *  *  *  * echo "hello" >> /var/log/docker/php/testcron.log
-*  *  *  *  * echo "hello projet" >> /usr/local/apache2/www/testcron.log
+*  *  *  *  * echo "hello projet" >> /home/www/testcron.log
 ```
 
 > [!NOTE]
