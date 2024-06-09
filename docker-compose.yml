@@ -78,6 +78,7 @@ services:
             context: .docker/images/mailhog
             args:
                 - VALUE_MHOG_VERSION=${VALUE_MAILHOG_VERSION}
+                - VALUE_UBUNTU_VERSION=latest
         container_name: ${NAME_PROJECT}_mailhog
         restart: always
         volumes:
