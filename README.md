@@ -58,7 +58,7 @@ Pour Windows, Linux et Mac.
 
 Les versions :
 <ul>
-  <li>symfony:7.0.7</li>
+  <li>symfony:7.1.1</li>
   <li>php:8.3.7RC1</li>
   <li>mariadb:10.4.18</li>
   <li>phpmyadmin:5.2.1</li>
