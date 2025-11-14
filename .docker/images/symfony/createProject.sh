@@ -38,6 +38,8 @@ fi
 
 composer install >> ${PHP_FOLDER_LOG}create.log 2>> ${PHP_FOLDER_LOG}create.log
 
+symfony server:ca:install
+
 #php bin/console doctrine:database:create
 
 #php bin/console doctrine:migrations:migrate --dry-run

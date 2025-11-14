@@ -11,4 +11,4 @@ then
 fi
 
 cd ${PHP_FOLDER_PROJECT}
-symfony server:$1 --no-tls -d >> ${PHP_FOLDER_LOG}/symfony_out.log 2>> ${PHP_FOLDER_LOG}/symfony_error.log
+symfony server:$1 --no-tls --allow-all-ip >> ${PHP_FOLDER_LOG}/symfony_out.log 2>> ${PHP_FOLDER_LOG}/symfony_error.log
